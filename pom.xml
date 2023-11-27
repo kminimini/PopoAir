@@ -15,7 +15,7 @@
     <name>Popoair</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <querydsl.version>5.0.0</querydsl.version>
     </properties>
     <dependencies>
