@@ -26,6 +26,7 @@ public class CustomerRepositoryTest {
 	@Autowired
 	private PasswordEncoder encoder;
 	
+
     @Test
     public void testManyToOneInsert() {
         Member member1 = Member.builder()
