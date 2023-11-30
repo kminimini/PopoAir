@@ -6,5 +6,9 @@ import com.popo.dto.JoinFormDto;
 public interface MemberService {
 
 	String Member (JoinFormDto joinFormDto);
+
+	void save(Member member);
+
+	Member Member(String name);
 }
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>약관 동의</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,17 +29,17 @@
         <p>약관 및 개인정보 수집 이용에 동의 해주세요.</p>
 
         <div class="agreement">
-            <input type="checkbox" id="checkAll" name="checkAll" th:checked="${checkAll}">
-            <label for="terms">필수 및 선택 약관에 모두 동의합니다.</label>
+            <input type="checkbox" id="checkAll" name="checkAll" th:checked="${checkAll}" onclick="checkBoxes()">
+            <label for="checkAll">필수 및 선택 약관에 모두 동의합니다.</label>
             <br>
 
-            <input type="checkbox" id="termsAgreement" name="termsAgreement" th:checked="${check1}">
-            <label for="termsAgreement">[필수] 이용약관</label>
-            <a href="contract">보기</a>
+            <input type="checkbox" id="agree1" name="agree1" th:checked="${check1}">
+            <label for="agree1">[필수] 이용약관</label>
+            <a th:href="@{/contract}">보기</a>
             <br>
 
-            <input type="checkbox" id="privacyAgreement" name="privacyAgreement" th:checked="${check2}">
-            <label for="privacyAgreement">[필수] 개인정보 수집 및 이용 동의</label>
+            <input type="checkbox" id="agree2" name="agree2" th:checked="${check2}">
+            <label for="agree2">[필수] 개인정보 수집 및 이용 동의</label>
             <a href="#">보기</a>
             <br>
 
@@ -57,11 +58,11 @@
         </div>
 
         <div class="btn-container">
-             <button onclick="validateForm()">확인</button>
-        <button onclick="cancelCheck()">취소</button>
+             <button onclick="return validateForm()">확인</button>
+        <button onclick="return login">취소</button>
         </div>
     </div>
-<script type="text/javascript" src="js/login.js"></script>
+
 
     <!-- <script th:inline="javascript">
         function confirmAgreements(allAgreementsChecked) {
@@ -78,5 +79,7 @@
             alert('약관 동의가 취소되었습니다.');
         }
     </script> -->
+    	 <script src="js/login.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -25,6 +25,11 @@ public class SecurityUser extends User {
 				AuthorityUtils.createAuthorityList(member.getRole().toString()));
 		
 		this.member = member;
+		
+		// 이것만 지우면 원래대로
+//		super(member.getMid().toString(), member.getPassword(),				
+//	            AuthorityUtils.createAuthorityList(member.getRole().toString()));
+//	    this.member = member;
 	}
 	
 	public Member getMember() {

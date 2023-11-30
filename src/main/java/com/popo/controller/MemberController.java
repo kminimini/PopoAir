@@ -16,10 +16,10 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping("/system")
-	public void index() {
-
-	}
+//	@RequestMapping("/system")
+//	public void index() {
+//
+//	}
 	
 	@GetMapping("/agree")
 	public String agree() {
@@ -30,19 +30,12 @@ public class MemberController {
 	public String checkagree(Model model) {
 		return "/system/agree";
 	}
-
-	@GetMapping("/join")
-	public String createJoin() {
-
-		return "/system/join";
-	}
-
 	
-	@PostMapping("/join")
-	public String createjoin(JoinFormDto joinFormDto) {
-		memberService.Member(joinFormDto);
-		return "/system/join";
-	}
+//	@GetMapping("/join")
+//	public String createjoin(JoinFormDto joinFormDto) {
+//		memberService.Member(joinFormDto);
+//		return "/system/join";
+//	}
 	
 	
 

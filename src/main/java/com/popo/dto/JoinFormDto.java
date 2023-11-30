@@ -11,13 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JoinFormDto {
 
+	private String id;
 	private String name;
 	private String email;
 	private String password;
 	private String address;
 	
 	@Builder
-	public void JoinFormDto(String name, String email, String password, String address) {
+	public void JoinFormDto(String id,String name, String email, String password, String address) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;

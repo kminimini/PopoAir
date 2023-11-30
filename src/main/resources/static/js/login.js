@@ -1,11 +1,12 @@
 function checkBoxes() {
-	var check1 = document.getElementById("check1");
-	var check2 = document.getElementById("check2");
+	var agree1 = document.getElementById("agree1");
+	var agree2 = document.getElementById("agree2");
 	var checkAll = document.getElementById("checkAll");
 	
-        check1.checked = checkAll.checked;
-        check2.checked = checkAll.checked;
+        agree1.checked = checkAll.checked;
+        agree2.checked = checkAll.checked;
 }
+
 function validateForm() {
     var agree1 = document.getElementById("agree1").checked;
     var agree2 = document.getElementById("agree2").checked;
@@ -16,7 +17,7 @@ function validateForm() {
     }
 
     // 여기에 추가적인 검증 로직이 있다면 추가하세요.
-
+	window.location.href = "/join";
     return true;
 }
 
@@ -38,3 +39,7 @@ function validateForm() {
         validationMessage.textContent = ''; // 'Check All'이 체크되지 않은 경우 메시지를 지웁니다.
       }
     }*/
+    
+    function Form() {
+		
+	}

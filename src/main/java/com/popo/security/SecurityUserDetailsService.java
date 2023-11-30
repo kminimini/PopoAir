@@ -1,6 +1,6 @@
 package com.popo.security;
 
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +29,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
 		
 		// (1) MemberRepository에서 회원정보 조회
 		Optional<Member> result = memberRepo.findById(username);
+		
 		
 		if (result.isPresent()) {
 			Member member = result.get();

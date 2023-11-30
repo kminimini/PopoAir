@@ -1,6 +1,6 @@
 package com.popo.test;
 
-import java.util.Date;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -31,8 +31,8 @@ public class CustomerRepositoryTest {
     public void testManyToOneInsert() {
         Member member1 = Member.builder()
                 .name("홍길동")
-                .id("user1")
-                .password(encoder.encode("1111"))
+                .id("popo")
+                .password(encoder.encode("11111111"))
                 .address("서울시 관악구 신림동")
                 .detaileAddress("문성로")
                 .email("email@email.com")
@@ -46,7 +46,7 @@ public class CustomerRepositoryTest {
         Member member2 = Member.builder()
                 .name("관리자")
                 .id("admin")
-                .password(encoder.encode("2222"))
+                .password(encoder.encode("22222222"))
                 .address("서울시 강남구 서초구")
                 .detaileAddress("밍밍빌딩")
                 .email("admin@email.com")

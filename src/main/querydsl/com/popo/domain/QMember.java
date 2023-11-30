@@ -34,6 +34,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath id = createString("id");
 
+    public final NumberPath<Long> mid = createNumber("mid", Long.class);
+
     public final StringPath name = createString("name");
 
     public final ListPath<ParkInfo, QParkInfo> parkInfoList = this.<ParkInfo, QParkInfo>createList("parkInfoList", ParkInfo.class, QParkInfo.class, PathInits.DIRECT2);

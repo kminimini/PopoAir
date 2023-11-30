@@ -1,8 +1,19 @@
 package com.popo.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /*
  * 항공편 정보 En
@@ -19,8 +30,8 @@ import lombok.*;
 public class Flight {
 
     @Id
-    @Column(name = "vihicleId")
-    private String vihicleId;
+    @Column(name = "vihicleId")	
+    private String vihicleId;		
 
     private String airlineNm;
 
