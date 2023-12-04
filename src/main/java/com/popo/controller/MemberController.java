@@ -21,6 +21,11 @@ public class MemberController {
 //
 //	}
 	
+	@GetMapping("/index")
+	public void mainView() {
+		
+	}
+	
 	@GetMapping("/agree")
 	public String agree() {
 		return "/system/agree";
@@ -31,10 +36,33 @@ public class MemberController {
 		return "/system/agree";
 	}
 	
-//	@GetMapping("/join")
-//	public String createjoin(JoinFormDto joinFormDto) {
-//		memberService.Member(joinFormDto);
-//		return "/system/join";
+	@GetMapping("/contract")
+	public String contract() {
+		return "/system/contract";
+	}
+	
+	@PostMapping("/contract")
+	public String showcontract(Model model) {
+		return "/system/contract";
+	}
+	
+//	@GetMapping("/findIdView")
+//	public String findIdView() throws Exception{
+//		return"/system/findIDView";
+//	}
+//	
+//	@PostMapping("/findIdView")
+//	public String findId(Member member,Model model) throws Exception{
+//		logger.info("memberEmail"+memberVO.getMemberEmail());
+//				
+//		if(memberService.findIdCheck(memberVO.getMemberEmail())==0) {
+//		model.addAttribute("msg", "이메일을 확인해주세요");
+//		return "/member/findIdView";
+//		}else {
+//		model.addAttribute("member", memberService.findId(memberVO.getMemberEmail()));
+//		return
+//				"/member/findId";
+//		}
 //	}
 	
 	

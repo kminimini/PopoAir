@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 //import com.popo.dto.JoinFormDto;
 
@@ -37,8 +37,8 @@ import lombok.*;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)				  
-    @Column(name = "MEMBER_SEQ", length = 36)						
+    @GeneratedValue(strategy = GenerationType.AUTO)	  
+    @Column(name = "MEMBER_SEQ", length = 36)			
     private Long mid;											  
 
     private String id;

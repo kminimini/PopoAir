@@ -17,7 +17,7 @@ function validateForm() {
     }
 
     // 여기에 추가적인 검증 로직이 있다면 추가하세요.
-	window.location.href = "/join";
+	window.location.href = "/system/join";
     return true;
 }
 
@@ -40,6 +40,4 @@ function validateForm() {
       }
     }*/
     
-    function Form() {
-		
-	}
+   

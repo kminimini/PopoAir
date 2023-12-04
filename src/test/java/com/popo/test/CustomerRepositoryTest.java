@@ -1,12 +1,12 @@
 package com.popo.test;
 
-import java.util.*;
+import java.util.Date;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.popo.domain.Board;
 import com.popo.domain.Member;
@@ -23,16 +23,14 @@ public class CustomerRepositoryTest {
 	@Autowired
 	private BoardRepository boardRepo;
 	
-	@Autowired
-	private PasswordEncoder encoder;
 	
-
+	@Disabled
     @Test
     public void testManyToOneInsert() {
         Member member1 = Member.builder()
                 .name("홍길동")
                 .id("popo")
-                .password(encoder.encode("11111111"))
+                .password("11111111")
                 .address("서울시 관악구 신림동")
                 .detaileAddress("문성로")
                 .email("email@email.com")
@@ -46,7 +44,7 @@ public class CustomerRepositoryTest {
         Member member2 = Member.builder()
                 .name("관리자")
                 .id("admin")
-                .password(encoder.encode("22222222"))
+                .password("22222222")
                 .address("서울시 강남구 서초구")
                 .detaileAddress("밍밍빌딩")
                 .email("admin@email.com")

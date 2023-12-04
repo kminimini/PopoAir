@@ -28,7 +28,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		// (1) MemberRepository에서 회원정보 조회
-		Optional<Member> result = memberRepo.findById(username);
+		Optional<Member> result = memberRepo.findByEmail(username);
 		
 		
 		if (result.isPresent()) {

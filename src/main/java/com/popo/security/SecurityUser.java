@@ -21,8 +21,9 @@ public class SecurityUser extends User {
 		
 		
 		// 암호화 처리
-		super(member.getId(), member.getPassword(),
+		super(member.getId(), "{noop}"+member.getPassword(),
 				AuthorityUtils.createAuthorityList(member.getRole().toString()));
+		
 		
 		this.member = member;
 		

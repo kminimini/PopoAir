@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService{
      * 이 메서드는 JoinFormDto의 데이터를 사용하여 Member 객체를 생성하고 MemberRepository를 사용하여 저장합니다.
      */
 	@Override
-	public String Member(JoinFormDto joinFormDto) {
+	public String entitySave(JoinFormDto joinFormDto) {
 		Member member = Member.builder()
 				.id(joinFormDto.getId())
 				.email(joinFormDto.getEmail())
@@ -48,11 +48,26 @@ public class MemberServiceImpl implements MemberService{
      * 이 메서드는 제공된 이름을 기준으로 데이터베이스에서 멤버 객체를 검색합니다.
      * 아직 구현되지 않았습니다
      */
+
 	@Override
-	public Member Member(String name) {
+	public Member getMember(String email) {
 		
-		return null;
+		Optional<Member> result = memberRepository.findByEmail(email);
+		
+		if (result.isPresent()) {
+			return result.get();
+		} else {
+			return null;
+		}
 	}
+
+
+//	@Override
+//	public int findIdCheck(String eamil) throws Exception {
+//		return memberRepository.findIdCheck(eamil);
+//	}
+
+	
 
 	
 }

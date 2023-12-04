@@ -1,5 +1,6 @@
 package com.popo.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,5 +12,12 @@ import com.popo.domain.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {	// String 이 원래임
 
-	Optional<Member> findById(String id);
+	//Optional<Member> findById(String username);
+	
+	Optional<Member> findByEmail(String email);
+	
+//	public int findIdCheck(String email)throws Exception;
+ 
+
+	
 }

@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -32,7 +30,7 @@ public class SecurityConfiguration {
       security.csrf().disable();
 
       // 사용자 인증을 위한 로그인 화면 사용 설정
-      security.formLogin().loginPage("/system/login").defaultSuccessUrl("/board/getBoardList", true); // 로그인에 사용할 url지정 -> 로그인 페이지
+      security.formLogin().loginPage("/system/login").defaultSuccessUrl("/index", true); // 로그인에 사용할 url지정 -> 로그인 페이지
                                                                      // 제공하는 메소드 제공해야함
 
       security.exceptionHandling().accessDeniedPage("/accessDenied");
@@ -45,11 +43,5 @@ public class SecurityConfiguration {
       return security.build();
    }
    
-   // 비밀번호 암호화
-   @Bean
-   public PasswordEncoder passwordEncoder() {
-      
-      return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-   }
    
 }
