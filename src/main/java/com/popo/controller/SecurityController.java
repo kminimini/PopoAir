@@ -1,10 +1,10 @@
 package com.popo.controller;
 
-<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
@@ -32,18 +32,41 @@ public class SecurityController {
 		
 	}
 	
+	@PostMapping("/login")
+	public String loginAction(Member member, Model model) {
+		Member findMember = memberService.getMember(member.getEmail());
+		
+		System.out.println("Member password=" + member.getPassword());
+		System.out.println("Findmember password=" + findMember.getPassword());
+		
+		if (findMember != null && passwordMatches(member.getPassword(), findMember.getPassword())) {
+			// 정상 사용자
+			model.addAttribute("member", findMember);
+			System.out.println("로그인 성공: " + findMember.getEmail());
+			return "redirect:/index";
+		} else {
+			// 로그인 인증 실패
+			return "redirect:/login";
+		}
+	}
+	
 	/* TODO 회원가입 화면 이동 */
 	@GetMapping("/join")
 	public String showJoinForm(Model model, JoinFormDto joinFormDto) {
 		memberService.entitySave(joinFormDto);
 		return "/system/join";
 	}
+
 	
 	/* TODO 회원가입 */
 	@PostMapping("/join")
     public String registerUser(Member member) {
         // 여기에 추가 유효성 검사 및 로직을 추가할 수 있습니다.
-
+		member.setId(member.getId());
+		member.setName(member.getName());
+		member.setEmail(member.getEmail());
+		member.setAddress(member.getAddress());
+		
         // 사용자 역할 설정(역할 열거형에 'ROLE_USER' 역할이 있다고 가정)
         member.setRole(Role.ROLE_MEMBER);
 
@@ -60,26 +83,20 @@ public class SecurityController {
         return "/system/login";
     }
 	
+	
+	
 
-	/*
-	@PostMapping("/login")
-    public String loginAction(Member member, Model model) {
-        Member findMember = memberService.getMember(member.getEmail());
+	
 
-        System.out.println("Member password="+member.getPassword());
-        System.out.println("Findmember password="+findMember.getPassword());
-        
-        if (findMember != null && passwordEncoder.matches(member.getPassword(), findMember.getPassword())) {
-            // 정상 사용자
-            model.addAttribute("member", findMember);
-            System.out.println("로그인 성공: " + findMember.getName());
-            return "redirect:/index";
-        } else {
-            // 로그인 인증 실패
-        	return "redirect:login";
-        }
-    }
-    */
+	// 패스워드 일치 여부를 확인하는 메서드
+	private boolean passwordMatches(String rawPassword, String encodedPassword) {
+	    // 여기에 비밀번호 일치 여부를 확인하는 로직을 추가합니다.
+	    // 예를 들어, Spring Security의 PasswordEncoder를 사용하는 것이 좋습니다.
+
+	    // 아래는 간단한 문자열 비교 예시입니다. 실제로는 보안을 고려하여 PasswordEncoder를 사용해야 합니다.
+	    return rawPassword.equals(encodedPassword);
+	}
+  
 	
 
 	
@@ -92,56 +109,3 @@ public class SecurityController {
 	}
 }
 	
-
-=======
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-/*
- * 반응 테스트용 클래스
- */
-
-@Controller
-public class SecurityController {
-
-	@GetMapping("/")
-	public String index() {
-		System.out.println("Index 요청입니다.");
-		
-		return "index";
-	}
-	
-	/* 로그인 화면 표시 요청 처리 */
-	@GetMapping("/login")
-	public void login() {
-		
-	}
-	
-	/* 로그인 성공시 처리하는 메소드 */
-	@GetMapping("/loginSuccess")
-	public void loginSuccess() {
-		
-	}
-	
-	/* 접근 권한 없음 페이지 처리 */
-	@GetMapping("/accessDenied")
-	public void accessDenied() {
-		
-	}
-	
-	@GetMapping("/member")
-	public void forMember() {
-		System.out.println("Member 요청입니다.");		
-	}
-	
-	@GetMapping("/manager")
-	public void forManager() {
-		System.out.println("Manager 요청입니다.");		
-	}
-	
-	@GetMapping("/admin")
-	public void forAdmin() {
-		System.out.println("Admin 요청입니다.");		
-	}
-}
->>>>>>> refs/heads/develop

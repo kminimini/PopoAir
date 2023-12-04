@@ -1,4 +1,4 @@
-package com.ezen.airport.entity;
+package com.popo.domain;
 
 import lombok.Data;
 

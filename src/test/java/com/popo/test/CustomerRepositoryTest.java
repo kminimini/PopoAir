@@ -23,7 +23,6 @@ public class CustomerRepositoryTest {
 	@Autowired
 	private BoardRepository boardRepo;
 	
-	
 	@Disabled
     @Test
     public void testManyToOneInsert() {

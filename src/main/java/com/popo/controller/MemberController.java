@@ -16,14 +16,11 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-//	@RequestMapping("/system")
-//	public void index() {
-//
-//	}
 	
 	@GetMapping("/index")
-	public void mainView() {
+	public String mainView() {
 		
+		return "index";
 	}
 	
 	@GetMapping("/agree")
@@ -33,7 +30,7 @@ public class MemberController {
 	
 	@PostMapping("/agree")
 	public String checkagree(Model model) {
-		return "/system/agree";
+		return "/system/join";
 	}
 	
 	@GetMapping("/contract")

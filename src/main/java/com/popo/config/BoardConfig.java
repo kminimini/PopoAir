@@ -1,10 +1,10 @@
-package com.ezen.airport.config;
+package com.popo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.ezen.airport.service.BoardService;
-import com.ezen.airport.service.BoardServiceImpl;
+import com.popo.service.BoardService;
+import com.popo.service.BoardServiceImpl;
 
 @Configuration
 public class BoardConfig {

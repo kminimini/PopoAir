@@ -9,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,35 +17,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/*
- * 게시판 En
- */
-
 @Getter
 @Setter
-@ToString (exclude = "member")
+@ToString(exclude = "member")
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Board")
 public class Board {
+   @Id
+   @GeneratedValue
+   private Long bseq;
+   private String btitle;
+   @Column(updatable=false)
+   private String writer;
+   private String bcontent;
+   // default 값으로 설정됨
+   @Column(insertable=false, updatable=false, columnDefinition="date default sysdate")
+   private Date createDate;
+   @Column(insertable=false, columnDefinition="number default 0")
+   private Long cnt;
 
-	@Id
-    @GeneratedValue
-    private int bnum;
-
-    private String btitle;
-    private String bcontent;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date createDate;
-
-    @Column(nullable = false)
-    private Long cnt;
-
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_SEQ", nullable = false, updatable = false)
-    private Member member;
+   @ManyToOne
+   @JoinColumn(name = "MEMBER_SEQ", nullable = false, updatable = false)
+   private Member member;
 }
