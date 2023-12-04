@@ -47,12 +47,14 @@
 			
 			
 			<div class="form-group">
-				<a class="btn btn-secondary btn-block" th:href="@{/system/join}"
+				<a class="btn btn-secondary btn-block" th:href="@{/agree}"
 					role="button">회원가입</a>
 			</div>
 		</form>
 	</div>
-
+	<div th:if="${param.error}" class="alert alert-danger">
+	    <strong th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}" />
+	</div>
 
 
 	 <script type="application/javascript" th:fragment="form-validation">

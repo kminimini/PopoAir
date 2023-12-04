@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
@@ -33,22 +32,23 @@ public class SecurityController {
 	}
 	
 	@PostMapping("/login")
-	public String loginAction(Member member, Model model) {
-		Member findMember = memberService.getMember(member.getEmail());
-		
-		System.out.println("Member password=" + member.getPassword());
-		System.out.println("Findmember password=" + findMember.getPassword());
-		
-		if (findMember != null && passwordMatches(member.getPassword(), findMember.getPassword())) {
-			// 정상 사용자
-			model.addAttribute("member", findMember);
-			System.out.println("로그인 성공: " + findMember.getEmail());
-			return "redirect:/index";
-		} else {
-			// 로그인 인증 실패
-			return "redirect:/login";
-		}
-	}
+    public String loginAction(Member member, Model model) {
+        Member findMember = memberService.getMember(member.getEmail());
+
+        System.out.println("Member password=" + member.getPassword());
+        System.out.println("Findmember password=" + findMember.getPassword());
+
+        if (findMember != null && passwordMatches(member.getPassword(), findMember.getPassword())) {
+            // 정상 사용자
+            model.addAttribute("member", findMember);
+            System.out.println("로그인 성공: " + findMember.getEmail());
+            return "redirect:/index";
+        } else {
+            // 로그인 인증 실패
+            model.addAttribute("error", "아이디나 비밀번호가 틀렸습니다.");
+            return "redirect:/login";
+        }
+    }
 	
 	/* TODO 회원가입 화면 이동 */
 	@GetMapping("/join")
