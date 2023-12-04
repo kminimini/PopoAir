@@ -18,7 +18,7 @@ import lombok.*;
 @Table(name = "Flight")
 public class Flight {
 
-	@Id
+    @Id
     @Column(name = "vihicleId")
     private String vihicleId;		// 항공편명
 

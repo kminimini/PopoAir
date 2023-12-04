@@ -12,22 +12,25 @@ import com.popo.domain.Member;
  */
 
 public class SecurityUser extends User {
-//	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	private Member member;
 	
-	// 생성자	
+	//생성자	
 	public SecurityUser(Member member) {
-		// 조상의 생성자를 호출하여 스프링 시큐리티에 id, password, role, id 사용유무 전달
-		// 암호화 하지 않은 처리
-//		super (member.getId(), "{noop}" + member.getPassword(),
-//			AuthorityUtils.createAuthorityList(member.getRole().toString()));
+		
 		
 		// 암호화 처리
-		super(member.getId(), member.getPassword(),
+		super(member.getId(), "{noop}"+member.getPassword(),
 				AuthorityUtils.createAuthorityList(member.getRole().toString()));
 		
+		
 		this.member = member;
+		
+		// 이것만 지우면 원래대로
+//		super(member.getMid().toString(), member.getPassword(),				
+//	            AuthorityUtils.createAuthorityList(member.getRole().toString()));
+//	    this.member = member;
 	}
 	
 	public Member getMember() {
