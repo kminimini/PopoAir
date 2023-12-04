@@ -1,4 +1,4 @@
-package com.ezen.airport.service;
+package com.popo.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,10 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ezen.airport.entity.Board;
-import com.ezen.airport.entity.QBoard;
-import com.ezen.airport.entity.Search;
-import com.ezen.airport.persistence.BoardRepository;
+import com.popo.domain.Board;
+import com.popo.domain.QBoard;
+import com.popo.domain.Search;
+import com.popo.repository.BoardRepository;
 import com.querydsl.core.BooleanBuilder;
 
 @Service
@@ -35,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public Board getBoard(Board board) {
-	    Long seq = board.getSeq();
+	    Long seq = board.getBseq();
 	    Optional<Board> optionalBoard = boardRepo.findById(seq);
 
 	    if (optionalBoard.isPresent()) {
@@ -54,17 +54,17 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void updateBoard(Board board) {
-		Board newBoard = boardRepo.findById(board.getSeq()).get();
+		Board newBoard = boardRepo.findById(board.getBseq()).get();
 		
-		newBoard.setTitle(board.getTitle());
-		newBoard.setContent(board.getContent());
+		newBoard.setBtitle(board.getBtitle());
+		newBoard.setBcontent(board.getBcontent());
 		boardRepo.save(newBoard);
 	}
 	
 	@Override
 	public void deleteBoard(Board board) {
 		
-		boardRepo.deleteById(board.getSeq());
+		boardRepo.deleteById(board.getBseq());
 	}
 
 	@Override
@@ -74,9 +74,9 @@ public class BoardServiceImpl implements BoardService {
 		QBoard qboard = QBoard.board;
 		
 		if (search.getSearchCondition().equals("TITLE")) {
-			builder.and(qboard.title.like("%" + search.getSearchKeyword() + "%"));
+			builder.and(qboard.btitle.like("%" + search.getSearchKeyword() + "%"));
 		} else if (search.getSearchCondition().equals("CONTENT")) {
-			builder.and(qboard.content.like("%" + search.getSearchKeyword() + "%"));
+			builder.and(qboard.bcontent.like("%" + search.getSearchKeyword() + "%"));
 		}
 		
 		return boardRepo.findAll(builder, pageable);

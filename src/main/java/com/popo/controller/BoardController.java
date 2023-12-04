@@ -1,4 +1,4 @@
-package com.ezen.airport.controller;
+package com.popo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ezen.airport.entity.Board;
-import com.ezen.airport.entity.Search;
-import com.ezen.airport.service.BoardService;
+import com.popo.domain.Board;
+import com.popo.domain.Search;
+import com.popo.service.BoardService;
+
+
 
 @Controller
 public class BoardController {

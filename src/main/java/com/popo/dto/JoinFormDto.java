@@ -1,7 +1,10 @@
 package com.popo.dto;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.popo.domain.Role;
+import com.popo.service.MemberService;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JoinFormDto {
 
+	
 	private String id;
 	private String name;
 	private String email;

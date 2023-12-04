@@ -24,7 +24,7 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final StringPath bcontent = createString("bcontent");
 
-    public final NumberPath<Integer> bnum = createNumber("bnum", Integer.class);
+    public final NumberPath<Long> bseq = createNumber("bseq", Long.class);
 
     public final StringPath btitle = createString("btitle");
 
@@ -33,6 +33,8 @@ public class QBoard extends EntityPathBase<Board> {
     public final DateTimePath<java.util.Date> createDate = createDateTime("createDate", java.util.Date.class);
 
     public final QMember member;
+
+    public final StringPath writer = createString("writer");
 
     public QBoard(String variable) {
         this(Board.class, forVariable(variable), INITS);
