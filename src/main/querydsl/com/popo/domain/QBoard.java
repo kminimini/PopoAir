@@ -34,8 +34,6 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final QMember member;
 
-    public final StringPath writer = createString("writer");
-
     public QBoard(String variable) {
         this(Board.class, forVariable(variable), INITS);
     }

@@ -1,11 +1,15 @@
 package com.popo.service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.popo.controller.MemberController;
 import com.popo.domain.Member;
 import com.popo.dto.JoinFormDto;
 import com.popo.repository.MemberRepository;
@@ -13,6 +17,9 @@ import com.popo.repository.MemberRepository;
 
 @Service
 public class MemberServiceImpl implements MemberService{
+	
+	// 로거 초기화
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MemberRepository memberRepository;
@@ -66,10 +73,12 @@ public class MemberServiceImpl implements MemberService{
 //	public int findIdCheck(String eamil) throws Exception {
 //		return memberRepository.findIdCheck(eamil);
 //	}
-
 	
+	// 회원 목록 불러오기
+	public List<Member> getAllMembers() {
+        return memberRepository.findAll();
+    }
 
-	
 }
 	
 	
