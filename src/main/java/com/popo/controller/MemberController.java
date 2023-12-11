@@ -1,20 +1,32 @@
 package com.popo.controller;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.popo.dto.JoinFormDto;
+import com.popo.domain.Member;
+import com.popo.repository.MemberRepository;
 import com.popo.service.MemberService;
 
 @Controller
 public class MemberController {
 
+	
+	// 로거 초기화
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+    
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 
 	
 	@GetMapping("/index")
@@ -43,6 +55,8 @@ public class MemberController {
 		return "/system/contract";
 	}
 	
+	
+	
 //	@GetMapping("/findIdView")
 //	public String findIdView() throws Exception{
 //		return"/system/findIDView";
@@ -62,6 +76,11 @@ public class MemberController {
 //		}
 //	}
 	
-	
-
+	// 회원 정보
+	@GetMapping("/admin/members")
+	public String listMembers(Model model) {
+	    List<Member> members = memberService.getAllMembers();
+	    model.addAttribute("members", members);
+	    return "/admin/members";
+	}
 }

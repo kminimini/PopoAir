@@ -55,7 +55,7 @@ public class CustomerRepositoryTest {
         memberRepo.save(member2);
 
         IntStream.rangeClosed(1, 13).forEach(i -> {
-            Board board = Board.builder()
+            Board board = Board.builder()      		
                     .member(member1)
                     .btitle("홍길동이 등록한 게시글 제목" + i)
                     .bcontent("홍길동이 등록한 게시글 내용" + i)
@@ -67,7 +67,7 @@ public class CustomerRepositoryTest {
         });
         
         IntStream.rangeClosed(1, 13).forEach(i -> {
-            Board board = Board.builder()
+            Board board = Board.builder()          		
                     .member(member2)
                     .btitle("관리자가 등록한 게시글 제목" + i)
                     .bcontent("관리자가 등록한 게시글 내용" + i)

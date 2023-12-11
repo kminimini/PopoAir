@@ -184,11 +184,12 @@
     
     <div class="header-container">
         <!-- 검색 입력 상자 및 버튼 추가 -->
-        <div>
-        	<button id="goBackButton" onclick="goBack()">목록</button>
-            <input type="text" id="searchInput" placeholder="검색어를 입력하세요...">
-            <button onclick="searchFAQ()">검색</button>
-        </div>
+		<div>
+		    <button id="goBackButton" onclick="goBack()">목록</button>
+		    <input type="text" id="searchInput" placeholder="검색어를 입력하세요...">
+		    <button onclick="searchFAQ()">검색</button>
+		</div>
+		<div id="faqListElement"></div>
 
         <!-- 추가적인 요소가 있다면 여기에 추가할 수 있습니다. -->
     </div>
@@ -1283,6 +1284,11 @@
                 function searchFAQ() {
                     const searchInput = document.getElementById('searchInput');
                     const searchTerm = searchInput.value.toLowerCase(); // 입력된 검색어를 소문자로 변환
+                 // 검색 버튼 클릭 시 검색 함수 호출
+                    const searchButton = document.querySelector('button[onclick="searchFAQ()"]');
+                    if (searchButton) {
+                        searchButton.addEventListener('click', searchFAQ);
+                    }
 
                     faqListElement.innerHTML = ''; // 기존 FAQ 목록 초기화
 
@@ -1328,6 +1334,9 @@
 	                    searchFAQ();
 	                }
 	            });
+	            
+	      
+	       
 
             });
         }

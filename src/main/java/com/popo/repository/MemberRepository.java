@@ -17,6 +17,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {	// Strin
 	Optional<Member> findByEmail(String email);
 	
 //	public int findIdCheck(String email)throws Exception;
+	
+    // 추가된 메서드
+    Optional<Member> findById(String memberId);
  
 
 	
