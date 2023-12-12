@@ -3,13 +3,14 @@ package com.popo.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.popo.controller.MemberController;
 import com.popo.domain.Member;
 import com.popo.dto.JoinFormDto;
 import com.popo.repository.MemberRepository;
@@ -18,11 +19,13 @@ import com.popo.repository.MemberRepository;
 @Service
 public class MemberServiceImpl implements MemberService{
 	
-	// 로거 초기화
-    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private EntityManager entityManager;
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
 	/*  RODO - 회원 등록 또는 업데이트
      * 이 메서드는 JoinFormDto에 제공된 정보를 기반으로 새 회원을 등록하거나 기존 회원을 업데이트합니다.
@@ -75,9 +78,34 @@ public class MemberServiceImpl implements MemberService{
 //	}
 	
 	// 회원 목록 불러오기
+	@Override
 	public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }
+
+	// mypage
+	@Override
+    public Member findById(Long id) {
+        return memberRepository.findById(id).orElse(null);
+    }
+	
+	// 회원 탈퇴
+	@Override
+	@Transactional
+	public void deleteMemberById(Long memberId) {
+	    Member member = memberRepository.findById(memberId).orElse(null);
+	    if (member != null) {
+	        try {
+	            memberRepository.delete(member);
+	            entityManager.flush(); // 플러시 수행
+	        } catch (Exception e) {
+	            // 예외 발생 시 롤백된 것인지 확인
+	            System.out.println("Error deleting member: " + e.getMessage());
+	            logger.error("Exception during member deletion", e);
+	            throw new RuntimeException("Error deleting member", e);
+	        }
+	    }
+	}
 
 }
 	

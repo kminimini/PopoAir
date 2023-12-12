@@ -1,26 +1,18 @@
 package com.popo.controller;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.popo.domain.Member;
 import com.popo.repository.MemberRepository;
 import com.popo.service.MemberService;
 
 @Controller
 public class MemberController {
-
-	
-	// 로거 초기화
-    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
     
 	@Autowired
 	private MemberService memberService;
@@ -29,11 +21,30 @@ public class MemberController {
 	private MemberRepository memberRepository;
 
 	
+//	@GetMapping("/index")
+//	public String mainView() {
+//		
+//		return "index";
+//	}
+	
 	@GetMapping("/index")
-	public String mainView() {
-		
-		return "index";
+	public String mainView(Model model) {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+	    // 로그 추가
+	    System.out.println("Authentication: " + authentication);
+
+	    if (authentication != null && authentication.isAuthenticated()) {
+	        // 사용자가 인증되었을 때, 사용자 이름 또는 관련된 사용자 정보를 제공
+	        model.addAttribute("authenticated", true);
+	        model.addAttribute("username", authentication.getName());
+	    }
+
+	    // 다른 로직을 추가할 수 있음
+
+	    return "index";
 	}
+
 	
 	@GetMapping("/agree")
 	public String agree() {
@@ -75,12 +86,5 @@ public class MemberController {
 //				"/member/findId";
 //		}
 //	}
-	
-	// 회원 정보
-	@GetMapping("/admin/members")
-	public String listMembers(Model model) {
-	    List<Member> members = memberService.getAllMembers();
-	    model.addAttribute("members", members);
-	    return "/admin/members";
-	}
+		
 }
