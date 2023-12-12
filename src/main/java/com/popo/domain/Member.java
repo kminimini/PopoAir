@@ -2,6 +2,7 @@ package com.popo.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,10 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 //import com.popo.dto.JoinFormDto;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /*
  * 고객 En
@@ -52,13 +56,22 @@ public class Member {
     
     private String 	enabled;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    private List<Board> boardList;
+//
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    private List<ParkInfo> parkInfoList;
+//
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    private List<Flight> flightList;
+    
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Board> boardList;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ParkInfo> parkInfoList;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Flight> flightList;
     
     

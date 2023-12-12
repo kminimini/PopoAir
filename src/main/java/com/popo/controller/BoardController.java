@@ -165,8 +165,4 @@ public class BoardController {
         return "accessDenied"; // accessDenied.html 뷰 파일 이름에 따라 수정
     }
 
-	@GetMapping("/index.html")
-    public String showIndexPage() {
-        return "index"; // 이 부분은 Thymeleaf 템플릿의 파일명과 일치해야 합니다.
-    }
 }

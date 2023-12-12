@@ -21,6 +21,12 @@ public interface MemberService {
 
 	// 회원 목록 불러오기
 	List<Member> getAllMembers();
+	
+	// mypage
+	Member findById(Long id);
+	
+	// 회원 탈퇴
+	void deleteMemberById(Long memberId);
 		
 }
 

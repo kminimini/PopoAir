@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+</head>
+<body>
+
+<h2>Welcome to My Page</h2>
+
+<div>
+    <p>ID: <span th:text="${currentMember.id}"></span></p>
+    <p>Name: <span th:text="${currentMember.name}"></span></p>
+    <p>Email: <span th:text="${currentMember.email}"></span></p>
+    <!-- 추가적인 정보들을 필요에 따라 표시 -->
+    
+    <!-- 회원 탈퇴 폼 추가 -->
+    <form action="/myPage/deleteAccount" method="post">
+        <input type="hidden" name="memberId" th:value="${currentMember.id}" />
+        <button type="submit">회원 탈퇴</button>
+    </form>
+    
+    <h4>메인 화면으로 <a th:href="@{/index}">이동</a></h4>
+</div>
+
+</body>
+</html>
