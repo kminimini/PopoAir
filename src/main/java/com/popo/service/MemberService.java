@@ -27,6 +27,11 @@ public interface MemberService {
 	
 	// 회원 탈퇴
 	void deleteMemberById(Long memberId);
+	
+	// 비밀번호 변경
+	boolean isCurrentPasswordValid(String email, String currentPassword);
+    void changePassword(String currentPassword, String newPassword);
+    Member getCurrentMember();
 		
 }
 
