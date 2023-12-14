@@ -1,5 +1,7 @@
 package com.popo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.popo.domain.Member;
 import com.popo.repository.MemberRepository;
 import com.popo.service.MemberService;
 
@@ -20,12 +23,6 @@ public class MemberController {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	
-//	@GetMapping("/index")
-//	public String mainView() {
-//		
-//		return "index";
-//	}
 	
 	@GetMapping("/index")
 	public String mainView(Model model) {
@@ -44,7 +41,6 @@ public class MemberController {
 
 	    return "index";
 	}
-
 	
 	@GetMapping("/agree")
 	public String agree() {

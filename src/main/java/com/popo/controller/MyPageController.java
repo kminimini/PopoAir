@@ -3,12 +3,17 @@ package com.popo.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.popo.domain.Member;
@@ -47,15 +52,55 @@ public class MyPageController {
             @RequestParam String confirmPassword,
             Model model) {
         
-        // 로그 추가
-        log.info("Received request to change password for user: {}", securityUser.getUsername());
-
-        // 비밀번호 변경 로직 추가
-        memberService.changePassword(currentPassword, newPassword);
-
-        // 리다이렉트
-        return "redirect:/system/login"; // 예시로 리다이렉트 경로를 "/myPage"로 지정
+        try {
+            // 비밀번호 변경 로직 추가
+            memberService.changePassword(currentPassword, newPassword);
+            
+            // 비밀번호가 성공적으로 변경된 경우
+            return "redirect:/system/login"; // 혹은 다른 적절한 페이지로 리다이렉트
+        } catch (Exception e) {
+            // 비밀번호 변경에 실패한 경우
+            model.addAttribute("error", "Failed to change password");
+            return "redirect:/myPage";  // 혹은 다른 적절한 페이지로 리다이렉트
+        }
     }
+    
+ // 비밀번호 유효성 검사 핸들러
+    @PostMapping("/myPage/validatePassword")
+    @ResponseBody
+    public String validatePassword(
+            @AuthenticationPrincipal SecurityUser securityUser,
+            @RequestParam String currentPassword,
+            @RequestParam String newPassword) {
+    	
+    	System.out.println("currentPassword=" + currentPassword);
+    	System.out.println("newPassword=" +newPassword);
+        // 현재 사용자의 실제 비밀번호 
+    	Member currentUser = securityUser.getMember();
+
+    	Member member = memberService.getMember(currentUser.getEmail());
+    	String userCurrentPassword = member.getPassword();
+        
+    	System.out.println("현재 비밀번호=" + userCurrentPassword);
+
+        // 입력한 현재 비밀번호가 실제 비밀번호와 일치하는지 여부 확인
+        if (currentPassword.equals(userCurrentPassword)) {
+        	boolean result = memberService.changePassword(currentPassword, newPassword);
+        	
+        	if (result) {
+        		System.out.println("success");
+        		return "success";
+        	} else {
+        		System.out.println("failure");
+        		return "failure";
+        	}
+        } else {
+        	// 현재 비밀번호가 일치하지 않으면 "failure" 반환
+        	System.out.println("failure2");
+            return "failure";
+        }
+    }
+
 
     // 회원탈퇴
     @PostMapping("/myPage/deleteAccount")
