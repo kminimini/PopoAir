@@ -97,11 +97,11 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 비밀번호 변경
 	@Override
-	public boolean isCurrentPasswordValid(String email, String currentPassword) {
+	public boolean isCurrentPasswordValid(String currentPassword) {
 	    Member currentMember = getCurrentMember();
 	    if (currentMember != null) {
 	        String storedPassword = currentMember.getPassword();
-	        log.info("Comparing passwords for user: {}", email);
+
 	        return storedPassword.equals(currentPassword);
 	    } else {
 	        // 현재 멤버 정보를 찾을 수 없는 경우
@@ -110,17 +110,22 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void changePassword(String currentPassword, String newPassword) {
+	public boolean changePassword(String currentPassword, String newPassword) {
 	    Member currentMember = getCurrentMember();
 	    String userEmail = getCurrentMember().getEmail();
-	    if (isCurrentPasswordValid(userEmail, currentPassword)) {
+	    
+	    if (isCurrentPasswordValid(currentPassword)) {
 	        currentMember.setPassword(newPassword);
 	        log.info("Changing password for user: {}", userEmail);
 	        memberRepository.save(currentMember); // 데이터베이스에 변경을 저장
+	        
+	        return true;
 	    } else {
 	        // 로그에 에러 메시지 출력
 	        log.error("현재 비밀번호가 올바르지 않습니다.");
 	        // 또는 다른 방식으로 에러를 처리할 수 있습니다.
+	        
+	        return false;
 	    }
 	}
 
