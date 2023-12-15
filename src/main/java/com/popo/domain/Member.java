@@ -42,19 +42,23 @@ public class Member {
     private Long mid;											  
 
     private String id;
-    private String name;    
+    private String name; 
+    private String ename; //영문 이름
+    private String rrnumber;	//주민등록번호
     private String password;
     private String address;
-    private String detaileAddress;
+    private String detailAddress;
     
-    @Column(unique = true)	// 회원은 이메일 통해 구분히야 하기 때문에, 동일한 값이 들어올 수 없도록 지정
     private String email;
+    
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.ROLE_MEMBER;
     
-    private String 	enabled;
+    @Column(columnDefinition = "varchar(255) default 'true'") // 'true'로 기본값 설정
+    private String enabled;
+    
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Board> boardList;
