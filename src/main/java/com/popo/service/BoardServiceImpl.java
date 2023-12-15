@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.popo.domain.Board;
-import com.popo.domain.QBoard;
 import com.popo.domain.Search;
 import com.popo.repository.BoardRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -69,23 +68,23 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Page<Board> getBoardList(Pageable pageable, Search search) {
-		BooleanBuilder builder = new BooleanBuilder();
-		
-		QBoard qboard = QBoard.board;
-		
-		if (search.getSearchCondition().equals("TITLE")) {
-			builder.and(qboard.btitle.like("%" + search.getSearchKeyword() + "%"));
-		} else if (search.getSearchCondition().equals("CONTENT")) {
-			builder.and(qboard.bcontent.like("%" + search.getSearchKeyword() + "%"));
-		}
-		
-		return boardRepo.findAll(builder, pageable);
-	}
+//		BooleanBuilder builder = new BooleanBuilder();
+//		
+//		QBoard qboard = QBoard.board;
+//		
+//		if (search.getSearchCondition().equals("TITLE")) {
+//			builder.and(qboard.btitle.like("%" + search.getSearchKeyword() + "%"));
+//		} else if (search.getSearchCondition().equals("CONTENT")) {
+//			builder.and(qboard.bcontent.like("%" + search.getSearchKeyword() + "%"));
+//		}
+//		
+//		return boardRepo.findAll(builder, pageable);
+//	}
 	
 	
-	
+	return null;
 }
-
+}
 
 
 

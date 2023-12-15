@@ -27,12 +27,14 @@ public class SecurityUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		System.out.println("loadUserByUsername() : username="+username);
 		// (1) MemberRepository에서 회원정보 조회
 		Optional<Member> result = memberRepo.findByEmail(username);
 		
 		
 		if (result.isPresent()) {
 			Member member = result.get();
+			System.out.println("loadUserByUsername() : member" + member);
 			
 			// (2) UserDetails 타입 객체로 변환
 			return new SecurityUser(member);

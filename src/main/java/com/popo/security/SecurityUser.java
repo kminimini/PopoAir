@@ -33,8 +33,6 @@ public class SecurityUser extends User {
 //	    this.member = member;
 	}
 	
-	public Member getMember() {
-		return member;
-	}
+	
 
 }
