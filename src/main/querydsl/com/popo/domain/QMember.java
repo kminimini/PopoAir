@@ -24,11 +24,13 @@ public class QMember extends EntityPathBase<Member> {
 
     public final ListPath<Board, QBoard> boardList = this.<Board, QBoard>createList("boardList", Board.class, QBoard.class, PathInits.DIRECT2);
 
-    public final StringPath detaileAddress = createString("detaileAddress");
+    public final StringPath detailAddress = createString("detailAddress");
 
     public final StringPath email = createString("email");
 
     public final StringPath enabled = createString("enabled");
+
+    public final StringPath ename = createString("ename");
 
     public final ListPath<Flight, QFlight> flightList = this.<Flight, QFlight>createList("flightList", Flight.class, QFlight.class, PathInits.DIRECT2);
 
@@ -45,6 +47,8 @@ public class QMember extends EntityPathBase<Member> {
     public final StringPath phone = createString("phone");
 
     public final EnumPath<Role> role = createEnum("role", Role.class);
+
+    public final StringPath rrnumber = createString("rrnumber");
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));

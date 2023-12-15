@@ -26,6 +26,4 @@ public interface BoardService {
 	Board getBoardById(Long bseq);
 	
 	Board getBoard(Long bseq);
-	
-	
 }

@@ -34,4 +34,3 @@ public interface MemberService {
     Member getCurrentMember();
 		
 }
-
