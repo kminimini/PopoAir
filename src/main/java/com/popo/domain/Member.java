@@ -42,28 +42,21 @@ public class Member {
     private Long mid;											  
 
     private String id;
-    private String name;    
+    private String name;  
+    private String ename; //영문 이름
+    private String rrnumber;	//주민등록번호
     private String password;
     private String address;
-    private String detaileAddress;
-    
-    @Column(unique = true)	// 회원은 이메일 통해 구분히야 하기 때문에, 동일한 값이 들어올 수 없도록 지정
+    private String detailAddress;
     private String email;
     private String phone;
 
     @Enumerated(EnumType.STRING)
     private Role role;
     
+    @Column(columnDefinition = "varchar(255) default 'true'") // 'true'로 기본값 설정
     private String 	enabled;
 
-//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-//    private List<Board> boardList;
-//
-//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-//    private List<ParkInfo> parkInfoList;
-//
-//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-//    private List<Flight> flightList;
     
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Board> boardList;
