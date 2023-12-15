@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.popo.domain.Board;
+import com.popo.domain.QBoard;
 import com.popo.domain.Search;
 import com.popo.repository.BoardRepository;
+import com.popo.repository.MemberRepository;
 import com.querydsl.core.BooleanBuilder;
 
 @Service
@@ -20,16 +22,21 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardRepository boardRepo;
 	
+	@Autowired
+	private MemberRepository memberRepo;
+	
 	@Override
 	public List<Board> getBoardList(Board board) {
 		
 		return (List<Board>) boardRepo.findAll();
 	}
 	
+	@Transactional
 	@Override
 	public void insertBoard(Board board) {
 		boardRepo.save(board);
 	}
+
 	
 	@Transactional
 	@Override
@@ -65,36 +72,34 @@ public class BoardServiceImpl implements BoardService {
 		
 		boardRepo.deleteById(board.getBseq());
 	}
-
+	
 	@Override
 	public Page<Board> getBoardList(Pageable pageable, Search search) {
-//		BooleanBuilder builder = new BooleanBuilder();
-//		
-//		QBoard qboard = QBoard.board;
-//		
-//		if (search.getSearchCondition().equals("TITLE")) {
-//			builder.and(qboard.btitle.like("%" + search.getSearchKeyword() + "%"));
-//		} else if (search.getSearchCondition().equals("CONTENT")) {
-//			builder.and(qboard.bcontent.like("%" + search.getSearchKeyword() + "%"));
-//		}
-//		
-//		return boardRepo.findAll(builder, pageable);
-//	}
-	
-	
-	return null;
+		BooleanBuilder builder = new BooleanBuilder();
+		
+		QBoard qboard = QBoard.board;
+		
+		if (search.getSearchCondition().equals("btitle")) {
+			builder.and(qboard.btitle.like("%" + search.getSearchKeyword() + "%"));
+		} else if (search.getSearchCondition().equals("bcontent")) {
+			builder.and(qboard.bcontent.like("%" + search.getSearchKeyword() + "%"));
+		}
+		
+		return boardRepo.findAll(builder, pageable);
+	}
+
+
+	@Override
+	public Board getBoardById(Long bseq) {
+	    return boardRepo.findById(bseq).orElse(null);
+	}
+
+	// 댓글
+	@Override
+    public Board getBoard(Long bseq) {
+        // Spring Data JPA를 사용하여 게시글을 가져오기
+        return boardRepo.findById(bseq).orElse(null);
+    }
+
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
 

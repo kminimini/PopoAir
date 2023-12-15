@@ -29,11 +29,9 @@ public class CustomerRepositoryTest {
         Member member1 = Member.builder()
                 .name("홍길동")
                 .id("popo")
-                .ename("HONGGIRDONG")
-                .rrnumber("1977.05.26")
                 .password("11111111")
                 .address("서울시 관악구 신림동")
-                .detailAddress("문성로")
+                .detaileAddress("문성로")
                 .email("email@email.com")
                 .phone("010-0000-1111")
                 .role(Role.ROLE_MEMBER)
@@ -45,11 +43,9 @@ public class CustomerRepositoryTest {
         Member member2 = Member.builder()
                 .name("관리자")
                 .id("admin")
-                .ename("ADMIN")
-                .rrnumber("1988.07.28")
                 .password("22222222")
                 .address("서울시 강남구 서초구")
-                .detailAddress("밍밍빌딩")
+                .detaileAddress("밍밍빌딩")
                 .email("admin@email.com")
                 .phone("010-1111-2222")
                 .role(Role.ROLE_ADMIN)
@@ -59,7 +55,7 @@ public class CustomerRepositoryTest {
         memberRepo.save(member2);
 
         IntStream.rangeClosed(1, 13).forEach(i -> {
-            Board board = Board.builder()
+            Board board = Board.builder()      		
                     .member(member1)
                     .btitle("홍길동이 등록한 게시글 제목" + i)
                     .bcontent("홍길동이 등록한 게시글 내용" + i)
@@ -71,7 +67,7 @@ public class CustomerRepositoryTest {
         });
         
         IntStream.rangeClosed(1, 13).forEach(i -> {
-            Board board = Board.builder()
+            Board board = Board.builder()          		
                     .member(member2)
                     .btitle("관리자가 등록한 게시글 제목" + i)
                     .bcontent("관리자가 등록한 게시글 내용" + i)

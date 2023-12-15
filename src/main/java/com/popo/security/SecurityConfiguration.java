@@ -1,12 +1,16 @@
 package com.popo.security;
 
+import java.util.Set;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -15,7 +19,7 @@ public class SecurityConfiguration {
    @Autowired
    private DataSource dataSource;
    @Autowired
-   private SecurityUserDetailsService securityUserDetailsService;
+   private SecurityUserDetailsService securityUserDetailsService;	
 
    // HttpSecurity - 사용자 인증 정보를 가지고 있는 객체
    @Bean
@@ -30,8 +34,17 @@ public class SecurityConfiguration {
       security.csrf().disable();
 
       // 사용자 인증을 위한 로그인 화면 사용 설정
-      security.formLogin().loginPage("/system/login").defaultSuccessUrl("/index", true); // 로그인에 사용할 url지정 -> 로그인 페이지
+      //security.formLogin().loginPage("/system/login").defaultSuccessUrl("/index", true); // 로그인에 사용할 url지정 -> 로그인 페이지
                                                                      // 제공하는 메소드 제공해야함
+      
+      security.formLogin().loginPage("/system/login").successHandler((request, response, authentication) -> {
+          Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+          if (roles.contains("ROLE_ADMIN")) {
+             response.sendRedirect("/admin/adminPage");
+          } else {
+             response.sendRedirect("/index");
+          }
+       }).permitAll();
 
       security.exceptionHandling().accessDeniedPage("/accessDenied");
 
@@ -42,4 +55,4 @@ public class SecurityConfiguration {
 
       return security.build();
    }
-}
+   

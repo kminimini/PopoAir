@@ -22,4 +22,8 @@ public interface BoardService {
 	void deleteBoard(Board board);
 
 	Page<Board> getBoardList(Pageable pageable, Search search);
+	
+	Board getBoardById(Long bseq);
+	
+	Board getBoard(Long bseq);
 }

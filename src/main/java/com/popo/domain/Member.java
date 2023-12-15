@@ -1,8 +1,8 @@
 package com.popo.domain;
 
 import java.util.List;
-import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,13 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-
-
 //import com.popo.dto.JoinFormDto;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /*
  * 고객 En
@@ -42,31 +42,36 @@ public class Member {
     private Long mid;											  
 
     private String id;
-    private String name; 
-    private String ename; //영문 이름
-    private String rrnumber;	//주민등록번호
+    private String name;    
     private String password;
     private String address;
-    private String detailAddress;
+    private String detaileAddress;
     
+    @Column(unique = true)	// 회원은 이메일 통해 구분히야 하기 때문에, 동일한 값이 들어올 수 없도록 지정
     private String email;
-    
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_MEMBER;
+    private Role role;
     
-    @Column(columnDefinition = "varchar(255) default 'true'") // 'true'로 기본값 설정
-    private String enabled;
-    
+    private String 	enabled;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    private List<Board> boardList;
+//
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    private List<ParkInfo> parkInfoList;
+//
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    private List<Flight> flightList;
+    
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Board> boardList;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ParkInfo> parkInfoList;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Flight> flightList;
     
     

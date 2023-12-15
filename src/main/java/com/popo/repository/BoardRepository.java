@@ -12,5 +12,5 @@ import com.popo.domain.Board;
 public interface BoardRepository extends JpaRepository<Board, Long>, QuerydslPredicateExecutor<Board> {
 
 	@Query("SELECT b FROM Board b")
-	   Page<Board> getBoardList(Pageable pageable);
+	Page<Board> getBoardList(Pageable pageable);
 }
